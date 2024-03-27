@@ -11,12 +11,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Feather } from "@expo/vector-icons";
 import Carousel from "react-native-snap-carousel";
-import { SliderData } from "../models/data";
+import { FreeGames, PaidGames, SliderData } from "../models/data";
 import BarnerSlider from "../components/BarnerSlider";
 import { windowWith } from "../utils/Diamensions";
 import CustomSwitch from "../components/CustomSwitch";
+import ListItems from "../components/ListItems";
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
 
   const [gamesTab, setGamesTab] = useState(1);
 
@@ -39,11 +40,13 @@ const HomeScreen = () => {
           }}
         >
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Hello John</Text>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
           <ImageBackground
             source={require("../assets/profile.jpg")}
             style={{ width: 35, height: 35 }}
             imageStyle={{ borderRadius: 25 }}
           />
+          </TouchableOpacity>
         </View>
 
         {/* Search view */}
@@ -91,6 +94,7 @@ const HomeScreen = () => {
           sliderWidth={windowWith - 40}
           itemWidth={300}
           loop={true}
+          autoplay={true}
         />
 
         {/* switch view */}
@@ -104,8 +108,27 @@ const HomeScreen = () => {
           />
         </View>
 
-        {gamesTab == 1 && <Text>Free Games</Text>}
-        {gamesTab == 2 && <Text>Paid Games</Text>}
+        {gamesTab == 1 && 
+          FreeGames.map(item => (
+            <ListItems 
+            key={item.id}
+            photo={item.poster}
+            title={item.title}
+            subTitle={item.subtitle}
+            isFree={item.isFree}
+            />
+          ))
+        }
+        {gamesTab == 2 && PaidGames.map(item => (
+            <ListItems 
+            key={item.id}
+            photo={item.poster}
+            title={item.title}
+            subTitle={item.subtitle}
+            isFree={item.isFree}
+            Price={item.price}
+            />
+          ))}
       </ScrollView>
     </SafeAreaView>
   );
