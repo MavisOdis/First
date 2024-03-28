@@ -17,8 +17,7 @@ import { windowWith } from "../utils/Diamensions";
 import CustomSwitch from "../components/CustomSwitch";
 import ListItems from "../components/ListItems";
 
-const HomeScreen = ({navigation}) => {
-
+const HomeScreen = ({ navigation }) => {
   const [gamesTab, setGamesTab] = useState(1);
 
   const renderBarner = ({ item, index }) => {
@@ -30,7 +29,7 @@ const HomeScreen = ({navigation}) => {
   };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <ScrollView style={{ padding: 15 }}>
+      <ScrollView style={{ padding: 15 }} showsVerticalScrollIndicator={false}>
         {/* Profile view */}
         <View
           style={{
@@ -41,11 +40,11 @@ const HomeScreen = ({navigation}) => {
         >
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>Hello John</Text>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-          <ImageBackground
-            source={require("../assets/profile.jpg")}
-            style={{ width: 35, height: 35 }}
-            imageStyle={{ borderRadius: 25 }}
-          />
+            <ImageBackground
+              source={require("../assets/profile.jpg")}
+              style={{ width: 35, height: 35 }}
+              imageStyle={{ borderRadius: 25 }}
+            />
           </TouchableOpacity>
         </View>
 
@@ -99,7 +98,7 @@ const HomeScreen = ({navigation}) => {
 
         {/* switch view */}
 
-        <View style={{ marginVertical:20}}>
+        <View style={{ marginVertical: 20 }}>
           <CustomSwitch
             selectionMode={1}
             option1="Free to play"
@@ -108,25 +107,25 @@ const HomeScreen = ({navigation}) => {
           />
         </View>
 
-        {gamesTab == 1 && 
-          FreeGames.map(item => (
-            <ListItems 
-            key={item.id}
-            photo={item.poster}
-            title={item.title}
-            subTitle={item.subtitle}
-            isFree={item.isFree}
+        {gamesTab == 1 &&
+          FreeGames.map((item) => (
+            <ListItems
+              key={item.id}
+              photo={item.poster}
+              title={item.title}
+              subTitle={item.subtitle}
+              isFree={item.isFree}
             />
-          ))
-        }
-        {gamesTab == 2 && PaidGames.map(item => (
-            <ListItems 
-            key={item.id}
-            photo={item.poster}
-            title={item.title}
-            subTitle={item.subtitle}
-            isFree={item.isFree}
-            Price={item.price}
+          ))}
+        {gamesTab == 2 &&
+          PaidGames.map((item) => (
+            <ListItems
+              key={item.id}
+              photo={item.poster}
+              title={item.title}
+              subTitle={item.subtitle}
+              isFree={item.isFree}
+              Price={item.price}
             />
           ))}
       </ScrollView>
